@@ -1,0 +1,1724 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="MeetMind Pro — AI Meeting Intelligence Workspace"
+    >
+
+    <meta
+        name="theme-color"
+        content="#08090d"
+    >
+
+    <title>MeetMind Pro — AI Meeting Intelligence</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+</head>
+
+<body>
+
+    <!-- =====================================================
+         APP
+    ====================================================== -->
+
+    <div class="app">
+
+        <!-- =================================================
+             SIDEBAR
+        ================================================== -->
+
+        <aside
+            class="sidebar"
+            id="sidebar"
+        >
+
+            <!-- BRAND -->
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    ✦
+                </div>
+
+                <div class="brand-content">
+                    <strong>MeetMind</strong>
+                    <span>AI Meeting Intelligence</span>
+                </div>
+
+            </div>
+
+
+            <!-- NEW MEETING -->
+
+            <button
+                class="new-meeting-sidebar"
+                id="newMeetingBtn"
+            >
+
+                <span>＋</span>
+
+                New Meeting
+
+            </button>
+
+
+            <!-- MAIN NAVIGATION -->
+
+            <nav class="sidebar-nav">
+
+                <button
+                    class="nav-item active"
+                    data-view="dashboard"
+                >
+
+                    <span>⌂</span>
+
+                    <div>
+                        <strong>Dashboard</strong>
+                    </div>
+
+                </button>
+
+
+                <button
+                    class="nav-item"
+                    data-view="meetings"
+                >
+
+                    <span>◫</span>
+
+                    <div>
+                        <strong>Meetings</strong>
+                    </div>
+
+                </button>
+
+
+                <button
+                    class="nav-item"
+                    data-view="tasks"
+                >
+
+                    <span>✓</span>
+
+                    <div>
+                        <strong>Action Items</strong>
+                    </div>
+
+                    <em id="sidebarTaskCount">
+                        0
+                    </em>
+
+                </button>
+
+
+                <button
+                    class="nav-item"
+                    data-view="insights"
+                >
+
+                    <span>◈</span>
+
+                    <div>
+                        <strong>Insights</strong>
+                    </div>
+
+                </button>
+
+            </nav>
+
+
+            <!-- RECENT -->
+
+            <div class="sidebar-section">
+
+                <span class="sidebar-label">
+                    RECENT MEETINGS
+                </span>
+
+
+                <div
+                    class="recent-meetings"
+                    id="recentMeetings"
+                >
+
+                    <!-- JS inserts meetings -->
+
+                </div>
+
+            </div>
+
+
+            <!-- SIDEBAR BOTTOM -->
+
+            <div class="sidebar-bottom">
+
+                <button
+                    class="nav-item"
+                    data-view="settings"
+                >
+
+                    <span>⚙</span>
+
+                    <div>
+                        <strong>Settings</strong>
+                    </div>
+
+                </button>
+
+
+                <div class="user-mini">
+
+                    <div class="user-avatar">
+                        D-M
+                    </div>
+
+                    <div class="user-info">
+
+                        <strong id="sidebarUserName">
+                            Dev Master
+                        </strong>
+
+                        <small>
+                            Personal workspace
+                        </small>
+
+                    </div>
+
+                    <button
+                        class="more-btn"
+                        id="profileMenuBtn"
+                    >
+                        •••
+                    </button>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =================================================
+             MAIN
+        ================================================== -->
+
+        <main class="main">
+
+
+            <!-- TOP BAR -->
+
+            <header class="topbar">
+
+                <div class="breadcrumb">
+
+                    <button
+                        class="mobile-menu"
+                        id="mobileMenu"
+                    >
+                        ☰
+                    </button>
+
+                    <span>
+                        Workspace
+                    </span>
+
+                    <i>/</i>
+
+                    <strong id="breadcrumbCurrent">
+                        Dashboard
+                    </strong>
+
+                </div>
+
+
+                <div class="top-actions">
+
+                    <button
+                        class="icon-btn"
+                        id="globalSearchBtn"
+                        title="Search"
+                    >
+                        ⌕
+                    </button>
+
+
+                    <button
+                        class="icon-btn"
+                        id="notificationBtn"
+                        title="Notifications"
+                    >
+
+                        ♢
+
+                        <span class="notification-dot"></span>
+
+                    </button>
+
+
+                    <button
+                        class="top-new-btn"
+                        id="topNewMeetingBtn"
+                    >
+
+                        <span>＋</span>
+
+                        New Meeting
+
+                    </button>
+
+                </div>
+
+            </header>
+
+
+            <!-- =================================================
+                 DASHBOARD
+            ================================================== -->
+
+            <section
+                class="view active"
+                id="dashboard"
+            >
+
+                <!-- PAGE HEADER -->
+
+                <div class="page-heading">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            YOUR WORKSPACE
+                        </span>
+
+                        <h1>
+                            Good morning,
+                            <span id="dashboardUserName">
+                                Dev Master
+                            </span>
+                            👋
+                        </h1>
+
+                        <p>
+                            Turn conversations into decisions,
+                            owners and next steps.
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        class="current-date"
+                        id="currentDate"
+                    >
+                    </div>
+
+                </div>
+
+
+                <!-- STATS -->
+
+                <div class="stats-grid">
+
+
+                    <article class="stat-card">
+
+                        <div class="stat-icon purple">
+                            ◫
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Total Meetings
+                            </span>
+
+                            <strong id="totalMeetings">
+                                0
+                            </strong>
+
+                        </div>
+
+                        <small>
+                            Workspace
+                        </small>
+
+                    </article>
+
+
+                    <article class="stat-card">
+
+                        <div class="stat-icon blue">
+                            ✓
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Open Action Items
+                            </span>
+
+                            <strong id="openTasks">
+                                0
+                            </strong>
+
+                        </div>
+
+                        <small>
+                            Needs attention
+                        </small>
+
+                    </article>
+
+
+                    <article class="stat-card">
+
+                        <div class="stat-icon green">
+                            ◈
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Decisions Captured
+                            </span>
+
+                            <strong id="totalDecisions">
+                                0
+                            </strong>
+
+                        </div>
+
+                        <small>
+                            Across meetings
+                        </small>
+
+                    </article>
+
+
+                    <article class="stat-card">
+
+                        <div class="stat-icon orange">
+                            ✦
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Meetings Analyzed
+                            </span>
+
+                            <strong id="meetingsAnalyzed">
+                                0
+                            </strong>
+
+                        </div>
+
+                        <small>
+                            AI processed
+                        </small>
+
+                    </article>
+
+                </div>
+
+
+                <!-- AI HERO -->
+
+                <article class="quick-start">
+
+                    <div class="quick-content">
+
+                        <div class="ai-orb">
+                            ✦
+                        </div>
+
+                        <div>
+
+                            <span class="quick-label">
+                                AI MEETING INTELLIGENCE
+                            </span>
+
+                            <h2>
+                                Have a transcript?
+                                Turn it into clarity.
+                            </h2>
+
+                            <p>
+                                Paste notes, upload a transcript,
+                                or use your microphone.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        class="primary-btn"
+                        id="dashboardAnalyzeBtn"
+                    >
+
+                        Analyze Meeting
+
+                        <span>→</span>
+
+                    </button>
+
+                </article>
+
+
+                <!-- TWO COLUMN -->
+
+                <div class="dashboard-columns">
+
+
+                    <!-- UPCOMING -->
+
+                    <article class="panel">
+
+                        <header class="panel-header">
+
+                            <div>
+
+                                <h3>
+                                    Upcoming Meetings
+                                </h3>
+
+                                <span>
+                                    Today
+                                </span>
+
+                            </div>
+
+                            <button
+                                class="text-btn"
+                                id="calendarBtn"
+                            >
+                                View calendar →
+                            </button>
+
+                        </header>
+
+
+                        <div
+                            class="upcoming-meetings"
+                            id="upcomingMeetings"
+                        >
+
+                            <div class="empty-state">
+                                No upcoming meetings.
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- ACTION ITEMS -->
+
+                    <article class="panel">
+
+                        <header class="panel-header">
+
+                            <div>
+
+                                <h3>
+                                    Action Items
+                                </h3>
+
+                                <span>
+                                    Needs attention
+                                </span>
+
+                            </div>
+
+                            <button
+                                class="text-btn"
+                                data-open-view="tasks"
+                            >
+                                View all →
+                            </button>
+
+                        </header>
+
+
+                        <div
+                            id="dashboardTasks"
+                        >
+
+                            <div class="empty-state">
+                                No open action items.
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+
+                <!-- RECENT MEETINGS -->
+
+                <article class="panel recent-panel">
+
+                    <header class="panel-header">
+
+                        <div>
+
+                            <h3>
+                                Recent Meetings
+                            </h3>
+
+                            <span>
+                                Your latest meeting intelligence
+                            </span>
+
+                        </div>
+
+                        <button
+                            class="text-btn"
+                            data-open-view="meetings"
+                        >
+                            View all →
+                        </button>
+
+                    </header>
+
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        MEETING
+                                    </th>
+
+                                    <th>
+                                        DATE
+                                    </th>
+
+                                    <th>
+                                        OUTPUT
+                                    </th>
+
+                                    <th>
+                                        HEALTH
+                                    </th>
+
+                                    <th>
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody
+                                id="recentMeetingsTable"
+                            >
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </article>
+
+            </section>
+
+
+            <!-- =================================================
+                 MEETING WORKSPACE
+            ================================================== -->
+
+            <section
+                class="view"
+                id="meetings"
+            >
+
+                <div class="page-heading">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            MEETING WORKSPACE
+                        </span>
+
+                        <h1>
+                            Analyze a Meeting
+                        </h1>
+
+                        <p>
+                            Paste a transcript, upload notes,
+                            or record directly from your browser.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="meeting-workspace">
+
+
+                    <!-- TRANSCRIPT PANEL -->
+
+                    <article class="input-panel">
+
+                        <div class="input-header">
+
+                            <div>
+
+                                <span class="eyebrow">
+                                    INPUT
+                                </span>
+
+                                <h2>
+                                    Meeting Transcript
+                                </h2>
+
+                            </div>
+
+
+                            <div class="input-actions">
+
+                                <label
+                                    class="upload-btn"
+                                    for="transcriptFile"
+                                >
+
+                                    ↑ Upload
+
+                                    <input
+                                        type="file"
+                                        id="transcriptFile"
+                                        accept=".txt,.md,.csv,.json"
+                                        hidden
+                                    >
+
+                                </label>
+
+
+                                <button
+                                    class="upload-btn"
+                                    id="loadDemoBtn"
+                                >
+                                    Demo
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- MEETING META -->
+
+                        <div class="meeting-meta">
+
+                            <input
+                                type="text"
+                                id="meetingTitle"
+                                placeholder="Meeting title"
+                                maxlength="120"
+                            >
+
+                            <input
+                                type="text"
+                                id="meetingParticipants"
+                                placeholder="Participants — e.g. Chris, Sarah, Dev Master"
+                            >
+
+                        </div>
+
+
+                        <!-- RECORDING -->
+
+                        <div class="recording-bar">
+
+                            <button
+                                class="record-button"
+                                id="recordButton"
+                            >
+
+                                <span
+                                    class="record-indicator"
+                                    id="recordIndicator"
+                                ></span>
+
+                                <strong id="recordButtonText">
+                                    Start recording
+                                </strong>
+
+                            </button>
+
+
+                            <span id="recordStatus">
+                                Browser speech recognition
+                                when supported
+                            </span>
+
+
+                            <span
+                                class="record-timer"
+                                id="recordTimer"
+                            >
+                                00:00
+                            </span>
+
+                        </div>
+
+
+                        <!-- TEXTAREA -->
+
+                        <textarea
+                            id="transcriptInput"
+                            placeholder="Paste your meeting transcript here...
+
+Example:
+
+Chris: The migration is almost complete.
+Dev Master: I'll finish the redirects by Friday.
+Sarah: I'll review the product pages tomorrow.
+Team: We agreed to launch next Monday."
+                        ></textarea>
+
+
+                        <!-- FOOTER -->
+
+                        <div class="input-footer">
+
+                            <span>
+
+                                <b id="wordCount">
+                                    0
+                                </b>
+
+                                words
+
+                                ·
+
+                                <b id="characterCount">
+                                    0
+                                </b>
+
+                                characters
+
+                            </span>
+
+
+                            <button
+                                class="primary-btn analyze-btn"
+                                id="analyzeMeetingBtn"
+                            >
+
+                                ✦ Analyze Meeting
+
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- AI SIDE PANEL -->
+
+                    <aside class="analysis-side-panel">
+
+                        <div class="side-ai-header">
+
+                            <div class="ai-orb small">
+                                ✦
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    MeetMind Engine
+                                </strong>
+
+                                <span>
+                                    Local intelligence mode
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="feature-check-list">
+
+                            <div>
+                                <i>✓</i>
+                                Summary extraction
+                            </div>
+
+                            <div>
+                                <i>✓</i>
+                                Action item detection
+                            </div>
+
+                            <div>
+                                <i>✓</i>
+                                Decision detection
+                            </div>
+
+                            <div>
+                                <i>✓</i>
+                                Deadline detection
+                            </div>
+
+                            <div>
+                                <i>✓</i>
+                                Follow-up detection
+                            </div>
+
+                            <div>
+                                <i>✓</i>
+                                Meeting health score
+                            </div>
+
+                        </div>
+
+
+                        <div class="privacy-note">
+
+                            <strong>
+                                Privacy
+                            </strong>
+
+                            <p>
+                                This frontend demo keeps
+                                meeting data in your browser.
+                                No transcript is uploaded.
+                            </p>
+
+                        </div>
+
+                    </aside>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 TASKS
+            ================================================== -->
+
+            <section
+                class="view"
+                id="tasks"
+            >
+
+                <div class="page-heading task-heading">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            ACTION MANAGEMENT
+                        </span>
+
+                        <h1>
+                            Action Items
+                        </h1>
+
+                        <p>
+                            Turn meeting outcomes into
+                            trackable work.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        class="primary-btn"
+                        id="addTaskBtn"
+                    >
+
+                        ＋ Add Task
+
+                    </button>
+
+                </div>
+
+
+                <!-- FILTERS -->
+
+                <div class="task-filters">
+
+                    <button
+                        class="task-filter active"
+                        data-filter="all"
+                    >
+                        All
+                    </button>
+
+                    <button
+                        class="task-filter"
+                        data-filter="open"
+                    >
+                        Open
+                    </button>
+
+                    <button
+                        class="task-filter"
+                        data-filter="today"
+                    >
+                        Today
+                    </button>
+
+                    <button
+                        class="task-filter"
+                        data-filter="completed"
+                    >
+                        Completed
+                    </button>
+
+                </div>
+
+
+                <!-- TASK BOARD -->
+
+                <div class="task-board">
+
+
+                    <!-- TODAY -->
+
+                    <article class="task-column">
+
+                        <header>
+
+                            <div>
+                                <span class="column-dot red"></span>
+                                Due Today
+                            </div>
+
+                            <b id="todayTaskCount">
+                                0
+                            </b>
+
+                        </header>
+
+
+                        <div
+                            id="todayTasks"
+                            class="task-list"
+                        >
+                        </div>
+
+                    </article>
+
+
+                    <!-- UPCOMING -->
+
+                    <article class="task-column">
+
+                        <header>
+
+                            <div>
+                                <span class="column-dot yellow"></span>
+                                Upcoming
+                            </div>
+
+                            <b id="upcomingTaskCount">
+                                0
+                            </b>
+
+                        </header>
+
+
+                        <div
+                            id="upcomingTasks"
+                            class="task-list"
+                        >
+                        </div>
+
+                    </article>
+
+
+                    <!-- COMPLETED -->
+
+                    <article class="task-column">
+
+                        <header>
+
+                            <div>
+                                <span class="column-dot green"></span>
+                                Completed
+                            </div>
+
+                            <b id="completedTaskCount">
+                                0
+                            </b>
+
+                        </header>
+
+
+                        <div
+                            id="completedTasks"
+                            class="task-list"
+                        >
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 INSIGHTS
+            ================================================== -->
+
+            <section
+                class="view"
+                id="insights"
+            >
+
+                <div class="page-heading">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            MEETING ANALYTICS
+                        </span>
+
+                        <h1>
+                            Meeting Insights
+                        </h1>
+
+                        <p>
+                            Understand whether your meetings
+                            are producing outcomes.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="insight-grid">
+
+
+                    <!-- HEALTH -->
+
+                    <article class="insight-card large">
+
+                        <span>
+                            AVERAGE MEETING HEALTH
+                        </span>
+
+                        <strong id="averageHealth">
+                            —
+                        </strong>
+
+                        <div class="score-bar">
+
+                            <span
+                                id="averageHealthBar"
+                            ></span>
+
+                        </div>
+
+                        <p id="healthNarrative">
+                            Analyze meetings to build
+                            your workspace intelligence.
+                        </p>
+
+                    </article>
+
+
+                    <!-- DECISIONS -->
+
+                    <article class="insight-card">
+
+                        <span>
+                            DECISIONS
+                        </span>
+
+                        <strong id="insightDecisions">
+                            0
+                        </strong>
+
+                        <small>
+                            captured
+                        </small>
+
+                    </article>
+
+
+                    <!-- ACTIONS -->
+
+                    <article class="insight-card">
+
+                        <span>
+                            ACTION ITEMS
+                        </span>
+
+                        <strong id="insightActions">
+                            0
+                        </strong>
+
+                        <small>
+                            extracted
+                        </small>
+
+                    </article>
+
+                </div>
+
+
+                <!-- ANALYTICS BREAKDOWN -->
+
+                <article class="panel">
+
+                    <header class="panel-header">
+
+                        <div>
+
+                            <h3>
+                                Meeting Health Breakdown
+                            </h3>
+
+                            <span>
+                                Based on analyzed meetings
+                            </span>
+
+                        </div>
+
+                    </header>
+
+
+                    <div class="health-list">
+
+                        <div>
+
+                            <span>
+                                Meetings analyzed
+                            </span>
+
+                            <b id="healthMeetingCount">
+                                0
+                            </b>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Average health
+                            </span>
+
+                            <b id="healthAverage">
+                                —
+                            </b>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Decisions per meeting
+                            </span>
+
+                            <b id="decisionRate">
+                                —
+                            </b>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Open action items
+                            </span>
+
+                            <b id="healthOpenTasks">
+                                0
+                            </b>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </section>
+
+
+            <!-- =================================================
+                 SETTINGS
+            ================================================== -->
+
+            <section
+                class="view"
+                id="settings"
+            >
+
+                <div class="page-heading">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            WORKSPACE
+                        </span>
+
+                        <h1>
+                            Settings
+                        </h1>
+
+                        <p>
+                            Manage your MeetMind workspace.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="settings-grid">
+
+
+                    <!-- PROFILE -->
+
+                    <article class="panel setting-card">
+
+                        <h3>
+                            Profile
+                        </h3>
+
+
+                        <label>
+
+                            Your Name
+
+                            <input
+                                type="text"
+                                id="settingsName"
+                                value="Dev Master"
+                            >
+
+                        </label>
+
+
+                        <label>
+
+                            Workspace Name
+
+                            <input
+                                type="text"
+                                id="settingsWorkspace"
+                                value="Personal workspace"
+                            >
+
+                        </label>
+
+
+                        <button
+                            class="primary-btn"
+                            id="saveSettingsBtn"
+                        >
+
+                            Save Changes
+
+                        </button>
+
+                    </article>
+
+
+                    <!-- DATA -->
+
+                    <article class="panel setting-card">
+
+                        <h3>
+                            Data & Storage
+                        </h3>
+
+
+                        <p>
+                            MeetMind stores your demo
+                            workspace locally in this browser.
+                        </p>
+
+
+                        <button
+                            class="secondary-btn"
+                            id="exportWorkspaceBtn"
+                        >
+
+                            ↓ Export Workspace JSON
+
+                        </button>
+
+
+                        <button
+                            class="danger-btn"
+                            id="clearWorkspaceBtn"
+                        >
+
+                            Clear Local Data
+
+                        </button>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- =====================================================
+         ANALYSIS MODAL
+    ====================================================== -->
+
+    <div
+        class="analysis-modal"
+        id="analysisModal"
+        aria-hidden="true"
+    >
+
+        <div class="analysis-modal-inner">
+
+            <button
+                class="modal-close"
+                id="closeAnalysisModal"
+                aria-label="Close"
+            >
+                ×
+            </button>
+
+
+            <!-- MODAL HEADER -->
+
+            <div class="analysis-title">
+
+                <div class="ai-orb small">
+                    ✦
+                </div>
+
+                <div>
+
+                    <span class="eyebrow">
+                        ANALYSIS COMPLETE
+                    </span>
+
+                    <h2 id="analysisTitle">
+                        Meeting Intelligence
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <!-- RESULTS -->
+
+            <div class="analysis-grid">
+
+
+                <!-- SUMMARY -->
+
+                <article class="result-card summary-card">
+
+                    <span class="result-label">
+                        SUMMARY
+                    </span>
+
+                    <p id="analysisSummary">
+                    </p>
+
+                </article>
+
+
+                <!-- HEALTH -->
+
+                <article class="result-card">
+
+                    <span class="result-label">
+                        MEETING HEALTH
+                    </span>
+
+                    <div class="health-result">
+
+                        <strong id="analysisHealth">
+                            —
+                        </strong>
+
+                        <span>
+                            outcome score
+                        </span>
+
+                    </div>
+
+                    <small id="analysisHealthText">
+                    </small>
+
+                </article>
+
+
+                <!-- PEOPLE -->
+
+                <article class="result-card">
+
+                    <span class="result-label">
+                        PARTICIPANTS
+                    </span>
+
+                    <div
+                        class="result-list"
+                        id="analysisPeople"
+                    >
+                    </div>
+
+                </article>
+
+
+                <!-- ACTIONS -->
+
+                <article class="result-card">
+
+                    <span class="result-label">
+                        ACTION ITEMS
+                    </span>
+
+                    <div
+                        class="result-list"
+                        id="analysisActions"
+                    >
+                    </div>
+
+                </article>
+
+
+                <!-- DECISIONS -->
+
+                <article class="result-card">
+
+                    <span class="result-label">
+                        DECISIONS
+                    </span>
+
+                    <div
+                        class="result-list"
+                        id="analysisDecisions"
+                    >
+                    </div>
+
+                </article>
+
+
+                <!-- DEADLINES -->
+
+                <article class="result-card">
+
+                    <span class="result-label">
+                        DEADLINES
+                    </span>
+
+                    <div
+                        class="result-list"
+                        id="analysisDeadlines"
+                    >
+                    </div>
+
+                </article>
+
+
+                <!-- QUESTIONS -->
+
+                <article class="result-card">
+
+                    <span class="result-label">
+                        FOLLOW-UPS / QUESTIONS
+                    </span>
+
+                    <div
+                        class="result-list"
+                        id="analysisQuestions"
+                    >
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <!-- MODAL ACTIONS -->
+
+            <div class="modal-actions">
+
+                <button
+                    class="secondary-btn"
+                    id="closeAnalysisBtn"
+                >
+                    Close
+                </button>
+
+                <button
+                    class="primary-btn"
+                    id="saveMeetingBtn"
+                >
+                    Save Meeting
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         ADD TASK MODAL
+    ====================================================== -->
+
+    <div
+        class="analysis-modal"
+        id="taskModal"
+        aria-hidden="true"
+    >
+
+        <div class="analysis-modal-inner task-modal-inner">
+
+            <button
+                class="modal-close"
+                id="closeTaskModal"
+            >
+                ×
+            </button>
+
+
+            <div class="analysis-title">
+
+                <div class="ai-orb small">
+                    ✓
+                </div>
+
+                <div>
+
+                    <span class="eyebrow">
+                        ACTION ITEM
+                    </span>
+
+                    <h2>
+                        Add Task
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <form id="taskForm">
+
+                <label class="form-field">
+
+                    Task
+
+                    <input
+                        type="text"
+                        id="taskTitle"
+                        placeholder="e.g. Send final approval"
+                        maxlength="150"
+                        required
+                    >
+
+                </label>
+
+
+                <label class="form-field">
+
+                    Owner
+
+                    <input
+                        type="text"
+                        id="taskOwner"
+                        placeholder="e.g. Dev Master"
+                        maxlength="60"
+                    >
+
+                </label>
+
+
+                <label class="form-field">
+
+                    Due Date
+
+                    <input
+                        type="date"
+                        id="taskDueDate"
+                    >
+
+                </label>
+
+
+                <div class="modal-actions">
+
+                    <button
+                        type="button"
+                        class="secondary-btn"
+                        id="cancelTaskBtn"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="primary-btn"
+                    >
+                        Add Task
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         TOAST
+    ====================================================== -->
+
+    <div
+        id="toastContainer"
+        class="toast-container"
+    >
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
