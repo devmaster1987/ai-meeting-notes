@@ -43,7 +43,7 @@ const wordCount =
     document.getElementById("wordCount");
 
 const analyzeBtn =
-    document.getElementById("analyzeBtn");
+    document.getElementById("analyzeMeetingBtn");
 
 const analyzeFromDashboard =
     document.getElementById("analyzeFromDashboard");
@@ -55,7 +55,7 @@ const analysisModal =
     document.getElementById("analysisModal");
 
 const closeModal =
-    document.getElementById("closeModal");
+    document.getElementById("closeAnalysisBtn");
 
 const newAnalysis =
     document.getElementById("newAnalysis");
@@ -312,17 +312,23 @@ function analyzeMeeting() {
 
     }
 
+const result =
+    generateMeetingIntelligence(
+        transcript
+    );
 
-    const result =
-        generateMeetingIntelligence(
-            transcript
-        );
+const timelineEvents =
+    generateTimelineEvents(
+        transcript
+    );
 
+renderAnalysis(result);
 
-    renderAnalysis(result);
+renderTimeline(
+    timelineEvents
+);
 
-
-    analysisModal.classList.add("show");
+analysisModal.classList.add("show");
 
 }
 
@@ -398,6 +404,195 @@ function generateMeetingIntelligence(text) {
     };
 
 }
+
+
+
+
+
+/* =========================================
+   MEETING TIMELINE INTELLIGENCE
+========================================= */
+
+function generateTimelineEvents(transcript) {
+
+    const sentences = transcript
+        .replace(/\s+/g, " ")
+        .split(/[.!?]+/)
+        .map(sentence => sentence.trim())
+        .filter(Boolean);
+
+    const events = [];
+
+    sentences.forEach((sentence, index) => {
+
+        const lower = sentence.toLowerCase();
+
+        let type = "Important Discussion";
+
+        if (
+            lower.includes("decided") ||
+            lower.includes("agreed") ||
+            lower.includes("approved") ||
+            lower.includes("confirmed")
+        ) {
+            type = "Decision";
+        }
+
+        else if (
+            lower.includes("will") ||
+            lower.includes("needs to") ||
+            lower.includes("need to") ||
+            lower.includes("must") ||
+            lower.includes("should")
+        ) {
+            type = "Action Item";
+        }
+
+        else if (
+            lower.includes("deadline") ||
+            lower.includes("by friday") ||
+            lower.includes("by monday") ||
+            lower.includes("tomorrow") ||
+            lower.includes("next week")
+        ) {
+            type = "Deadline";
+        }
+
+        else if (
+            lower.includes("discuss") ||
+            lower.includes("topic") ||
+            lower.includes("regarding") ||
+            lower.includes("about")
+        ) {
+            type = "Key Topic";
+        }
+
+        events.push({
+            id: index,
+            type: type,
+            text: sentence,
+            sourceIndex: index
+        });
+
+    });
+
+    return events;
+}
+
+/* =========================================
+   RENDER MEETING TIMELINE
+========================================= */
+
+function renderTimeline(events) {
+
+    const timeline =
+        document.getElementById("meetingTimeline");
+
+    const eventCount =
+        document.getElementById("timelineEventCount");
+
+    if (!timeline || !eventCount) return;
+
+
+    eventCount.textContent =
+        `${events.length} event${events.length === 1 ? "" : "s"}`;
+
+
+    if (!events.length) {
+
+        timeline.innerHTML = `
+            <div class="timeline-empty">
+                No important timeline events detected.
+            </div>
+        `;
+
+        return;
+    }
+
+
+    timeline.innerHTML =
+        events
+            .map(event => `
+
+                <div
+                    class="timeline-event"
+                    data-source-index="${event.sourceIndex}"
+                >
+
+                    <span class="timeline-dot"></span>
+
+                    <span class="timeline-type">
+                        ${escapeHTML(event.type)}
+                    </span>
+
+                    <div class="timeline-content">
+
+                        ${escapeHTML(event.text)}
+
+                        <span class="timeline-source">
+                            Transcript segment ${event.sourceIndex + 1}
+                        </span>
+
+                    </div>
+
+                </div>
+
+            `)
+            .join("");
+
+
+            timeline
+    .querySelectorAll(".timeline-event")
+    .forEach((element, index) => {
+
+        element.addEventListener("click", () => {
+
+            const event = events[index];
+
+            if (!transcriptInput || !event) return;
+
+            const transcript = transcriptInput.value;
+
+            const start =
+                transcript
+                    .toLowerCase()
+                    .indexOf(
+                        event.text.toLowerCase()
+                    );
+
+            if (start === -1) return;
+
+            const end =
+                start + event.text.length;
+
+            transcriptInput.focus();
+
+            transcriptInput.setSelectionRange(
+                start,
+                end
+            );
+
+            document
+                .querySelectorAll(".timeline-event")
+                .forEach(item =>
+                    item.classList.remove("is-active")
+                );
+
+            element.classList.add("is-active");
+
+            transcriptInput.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+
+        });
+
+    });
+
+
+}
+
+
 
 
 /* =========================================
@@ -723,73 +918,113 @@ function calculateMeetingHealth(
 /* =========================================
    RENDER ANALYSIS
 ========================================= */
-
 function renderAnalysis(result) {
 
     const summary =
-        document.getElementById(
-            "summaryResult"
-        );
-
+        document.getElementById("analysisSummary");
 
     const health =
-        document.getElementById(
-            "healthScore"
-        );
+        document.getElementById("analysisHealth");
 
+    const people =
+        document.getElementById("analysisPeople");
 
-    const actionResults =
-        document.getElementById(
-            "actionResults"
-        );
+    const actions =
+        document.getElementById("analysisActions");
 
+    const decisions =
+        document.getElementById("analysisDecisions");
 
-    const decisionResults =
-        document.getElementById(
-            "decisionResults"
-        );
+    const deadlines =
+        document.getElementById("analysisDeadlines");
+
+    const questions =
+        document.getElementById("analysisQuestions");
 
 
     if (summary) {
-
-        summary.textContent =
-            result.summary;
-
+        summary.textContent = result.summary;
     }
 
 
     if (health) {
-
-        health.textContent =
-            `${result.health}%`;
-
+        health.textContent = `${result.health}%`;
     }
 
 
-    if (actionResults) {
+    if (people) {
 
-        actionResults.innerHTML =
-            renderActionItems(
-                result.actionItems
-            );
-
+        people.innerHTML =
+            result.people.length
+                ? result.people
+                    .map(person => `
+                        <div>
+                            <span class="result-check">✓</span>
+                            ${escapeHTML(person)}
+                        </div>
+                    `)
+                    .join("")
+                : `
+                    <div>
+                        No participants detected
+                    </div>
+                `;
     }
 
 
-    if (decisionResults) {
-
-        decisionResults.innerHTML =
-            renderDecisions(
-                result.decisions
-            );
-
+    if (actions) {
+        actions.innerHTML =
+            renderActionItems(result.actionItems);
     }
 
 
-    updateHealthColor(
-        result.health
-    );
+    if (decisions) {
+        decisions.innerHTML =
+            renderDecisions(result.decisions);
+    }
 
+
+    if (deadlines) {
+
+        deadlines.innerHTML =
+            result.deadlines.length
+                ? result.deadlines
+                    .map(deadline => `
+                        <div>
+                            <span class="result-check">✓</span>
+                            ${escapeHTML(deadline)}
+                        </div>
+                    `)
+                    .join("")
+                : `
+                    <div>
+                        No deadlines detected
+                    </div>
+                `;
+    }
+
+
+    if (questions) {
+
+        questions.innerHTML =
+            result.questions.length
+                ? result.questions
+                    .map(question => `
+                        <div>
+                            <span class="result-check">✓</span>
+                            ${escapeHTML(question)}
+                        </div>
+                    `)
+                    .join("")
+                : `
+                    <div>
+                        No follow-up questions detected
+                    </div>
+                `;
+    }
+
+
+    updateHealthColor(result.health);
 }
 
 
