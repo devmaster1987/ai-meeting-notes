@@ -100,6 +100,14 @@ No framework or build system is required.
 
 ---
 
+## 📸 Screenshots
+
+<div align="center">
+
+<img src="./Images/screencapture-127-0-0-1-5500-index-html-2026-08-19-07_03_20" width="400"/>
+
+</div>
+
 ## 📂 Project Structure
 
 ```text
