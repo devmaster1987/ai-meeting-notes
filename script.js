@@ -3,6 +3,20 @@
    Vanilla JavaScript
 ========================================= */
 
+
+function generatePDF(){
+
+    console.log("PDF GENERATE START");
+
+    const { jsPDF } = window.jspdf;
+
+    const doc = new jsPDF();
+
+    doc.text("MeetMind PDF Test",20,20);
+
+    doc.save("meetmind-test.pdf");
+}
+
 "use strict";
 
 
@@ -1730,3 +1744,63 @@ initializeApp();
 console.log(
     "✦ MeetMind AI Meeting Intelligence loaded"
 );
+
+
+function generatePDF(){
+
+    const { jsPDF } = window.jspdf;
+
+    const doc = new jsPDF();
+
+
+    const summary =
+    document.getElementById("analysisSummary")?.innerText || "No summary available";
+
+
+    const participants =
+    document.getElementById("analysisPeople")?.innerText || "No participants";
+
+
+    const actions =
+    document.getElementById("analysisActions")?.innerText || "No action items";
+
+
+    const decisions =
+    document.getElementById("analysisDecisions")?.innerText || "No decisions";
+
+
+    const transcript =
+    document.getElementById("transcriptInput")?.value || "No transcript";
+
+
+    doc.setFontSize(18);
+    doc.text("MeetMind Pro Report",20,20);
+
+
+    doc.setFontSize(12);
+
+    doc.text("Meeting Summary",20,40);
+    doc.text(summary,20,50);
+
+
+    doc.text("Participants",20,80);
+    doc.text(participants,20,90);
+
+
+    doc.text("Action Items",20,120);
+    doc.text(actions,20,130);
+
+
+    doc.text("Decisions",20,160);
+    doc.text(decisions,20,170);
+
+
+    doc.addPage();
+
+    doc.text("Transcript",20,20);
+    doc.text(transcript.substring(0,1500),20,40);
+
+
+    doc.save("meetmind-report.pdf");
+
+}
