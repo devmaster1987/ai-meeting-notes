@@ -1,14 +1,21 @@
-# ✦ MeetMind Pro
+<div align="center">
 
-> AI Meeting Intelligence Workspace
+# 🧠 MeetMind Pro
 
-MeetMind Pro is a modern meeting intelligence application designed to turn raw meeting conversations into structured, actionable outcomes.
+### AI Meeting Intelligence Workspace
 
-Instead of simply storing meeting transcripts, MeetMind focuses on identifying **what was discussed, what was decided, who is responsible, and what needs to happen next.**
+Transform conversations into summaries, decisions, and actionable tasks.
 
-Built with pure **HTML, CSS, and JavaScript** with no frontend framework required.
+<br/>
 
----
+![HTML](https://img.shields.io/badge/HTML5-orange?style=for-the-badge&logo=html5)
+![CSS](https://img.shields.io/badge/CSS3-blue?style=for-the-badge&logo=css3)
+![JavaScript](https://img.shields.io/badge/JavaScript-yellow?style=for-the-badge&logo=javascript)
+
+![GitHub Stars](https://img.shields.io/github/stars/devmaster1987/MeetMind-Pro?style=for-the-badge)
+![GitHub Issues](https://img.shields.io/github/issues/devmaster1987/MeetMind-Pro?style=for-the-badge)
+
+</div>
 
 ## ✨ Features
 
