@@ -3259,3 +3259,54 @@ tbody tr:hover {
     }
 
 }
+
+
+
+
+/* ===============================
+   ISSUE #4 UI IMPROVEMENT
+   Mobile Optimization
+================================ */
+
+@media(max-width:760px){
+
+    .view{
+        padding:25px 16px 60px;
+    }
+
+    .page-heading{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:12px;
+    }
+
+    .page-heading h1{
+        font-size:26px;
+    }
+
+    .stats-grid{
+        grid-template-columns:1fr;
+        gap:12px;
+    }
+
+    .stat-card{
+        min-height:90px;
+    }
+
+    .dashboard-columns{
+        gap:12px;
+    }
+
+    .panel{
+        border-radius:14px;
+    }
+
+    .task-column{
+        min-height:auto;
+    }
+
+    .task-card{
+        padding:12px;
+    }
+
+}
