@@ -127,3 +127,50 @@ meetmind-pro/
 ├── README.md
 ├── CONTRIBUTING.md
 └── LICENSE
+
+
+---
+
+# 🚀 Demo
+
+Experience MeetMind Pro in action.
+
+🔗 Live Demo:
+(Add your deployment link here)
+
+---
+
+# 🛣️ Roadmap
+
+Future improvements planned for MeetMind Pro:
+
+- [x] Meeting transcript analysis
+- [x] Automatic meeting summaries
+- [x] Action item extraction
+- [x] Decision detection
+- [x] Voice meeting capture
+- [x] Local workspace storage
+
+### Upcoming
+
+- [ ] AI-powered speaker identification
+- [ ] Calendar integration
+- [ ] Cloud workspace sync
+- [ ] Team collaboration
+- [ ] Advanced AI meeting insights
+- [ ] Export meetings as PDF
+- [ ] User authentication
+
+---
+
+# 🤝 Contributing
+
+Contributions are welcome!
+
+If you have ideas, improvements, or bug fixes:
+
+1. Fork the repository
+2. Create a new branch
+
+```bash
+git checkout -b feature/new-feature
